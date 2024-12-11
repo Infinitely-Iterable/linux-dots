@@ -1,0 +1,15 @@
+bar {
+    status_command i3status
+    font pango:DejaVu Sans Mono 13
+    colors {
+        background #181F27
+        statusline #E2C1A6
+        separator  #E2C1A6
+
+        # Focused workspace indicator with your chosen colors
+        focused_workspace  #E2C1A6 #135CA5 #B27134
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+        binding_mode       #2f343a #900000 #ffffff
+    }
+}

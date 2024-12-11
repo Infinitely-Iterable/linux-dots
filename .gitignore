@@ -1,0 +1,22 @@
+# ignore all
+*
+!*/
+
+
+!.gitignore
+
+# include specifics
+!i3blocks/**
+!polybar/**
+!calcurse/**
+!i3/**
+!picom/**
+!htop/**
+!Thunar/**
+!tiling-assistant/**
+!neofetch/**
+!ranger/**
+!rofi/**
+!i3status/**
+!alacritty/**
+

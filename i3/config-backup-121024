@@ -1,0 +1,282 @@
+# i3 config fi1518-le (v4)
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+set $mod Mod4
+
+#set finger touchscreen controls
+exec --no-startup-id xsetwacom set "Wacom HID 5396 Finger touch" TapTime 750
+exec --no-startup-id xsetwacom set "Wacom HID 5396 Finger touch" ScrollDistance 250
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Monolisa 10
+
+#start polkit authentication
+exec --no-startup-id lxpolkit &
+
+#init KDE (phone connect)
+exec --no-startup-id /usr/lib/x86_64-linux-gnu/libexec/kdeconnectd
+exec --no-startup-id kdeconnect-indicator
+
+#set wallpaper
+exec feh --bg-fill Pictures/bgs/bg18.jpg
+
+#init TLP
+exec tlp start
+exec --no-startup-id brightnessctl set 25%
+
+#init picom compositor
+exec_always --no-startup-id picom --experimental-backends --config ~/.config/picom/picom.conf
+
+#start virtual keyboard
+exec --no-startup-id flatpak run org.cubocore.CoreKeyboard
+# Make CoreKeyboard always appear on top
+for_window [class="CoreKeyboard"] floating enable
+for_window [class="CoreKeyboard"] sticky enable
+# This is the key line that ensures it stays on top
+#assign [class="CoreKeyboard"] → floating
+
+for_window [class="Gpick"] floating enable
+
+# Ensure i3wm shortcuts work even when VirtualBox is focused 
+for_window [class="VirtualBox"] focus_follows_mouse no for_window [class="VirtualBox"] floating enable 
+
+#focus wont follow mouse
+focus_follows_mouse no
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy --nofork
+exec --no-startup-id nm-applet
+#exec --no-startup-id flameshot
+exec --no-startup-id blueman-applet
+
+bindsym --release $mod+c exec --no-startup-id /home/grant-decapua/Documents/scripts/auto-layout.sh
+
+################Brightness and Volume Control########################
+
+bindsym --release XF86MonBrightnessUp exec sudo  brightnessctl set +5%
+bindsym --release XF86MonBrightnessDown exec sudo brightnessctl set -5%
+bindsym --release XF86AudioRaiseVolume exec amixer set Master 5%+
+bindsym --release  XF86AudioLowerVolume exec amixer set Master 5%-
+bindsym --release XF86AudioMute exec amixer set Master toggle
+
+floating_modifier $mod
+tiling_drag modifier titlebar
+bindsym $mod+Shift+q kill
+
+#bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym --release $mod+s exec --no-startup-id /home/grant-decapua/Documents/scripts/script-dmenu.sh
+
+############## App Shortcuts #################
+
+#open browsers
+bindsym $mod+i exec qutebrowser
+bindsym $mod+shift+i exec firefox
+bindsym $mod+n exec obsidian
+bindsym $mod+p exec splashtop-business
+bindsym $mod+w exec VirtualBoxVM --startvm win-10
+bindsym $mod+shift+p exec keeperpasswordmanager
+bindsym $mod+shift+d exec discord
+bindsym $mod+Return exec alacritty
+bindsym $mod+shift+e exec /opt/cxoffice/bin/wine --bottle "Microsoft_Office_365-2" --cx-app excel.exe
+bindsym $mod+shift+v exec vim
+
+# Scratchpad for Xournal++
+#exec --no-startup-id xournalpp --name scratch
+#for_window [instance="xournalpp"] move scratchpad
+#bindsym $mod+Shift+s scratchpad show
+
+# Scratchpad for XDE SMS
+exec --no-startup-id kdeconnect-sms --name scratch2
+for_window [instance="kdeconnect-sms"] move scratchpad
+bindsym $mod+m scratchpad show
+
+#for_window [class="excel.exe"] floating enable
+#for_window [class="excel.exe" title="Microsoft Excel"] floating enable
+#for_window [class="excel.exe" title=".*Excel.*"] floating enable
+
+#select screenshot area
+bindsym $mod+shift+f exec flameshot gui
+
+# change focus (disabled in lieu of using mod + arrows)
+ bindsym $mod+h focus left
+ bindsym $mod+j focus down
+ bindsym $mod+k focus up
+ bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Move whole workspace between outputs
+bindsym $mod+Control+h move workspace to output left
+bindsym $mod+Control+l move workspace to output right
+bindsym $mod+Control+j move workspace to output down
+bindsym $mod+Control+k move workspace to output up
+
+#Lock Screen
+bindsym $mod+semicolon exec i3lock-fancy
+
+##############################
+# extra options for windows: #
+##############################
+
+# border indicator on windows:
+new_window pixel 6
+
+# window title alignment
+title_align center
+
+# split in horizontal orientation
+# bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Auto Tiling
+exec_always --no-startup-id autotiling
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+esc exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+
+bar {
+    status_command i3status
+    font pango:DejaVu Sans Mono 13
+    colors {
+        background #181F27
+        statusline #B27134
+        separator  #B27134
+
+        # Focused workspace indicator with your chosen colors
+        focused_workspace  #B27134 #135CA5 #B27134
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+        binding_mode       #2f343a #900000 #ffffff
+    }
+}
+
+
+##############Appearance Formatting#####################
+
+# Set pastel colors for window borders
+# class                  border    background  text        indicator   child_border
+client.focused           #F1C40F   #F4D1AE     #FFFFFF     #F4D1AE     #F4A7B9
+client.focused_inactive  #D4E2D4   #E9ECE9     #888888     #D4E2D4     #E9ECE9
+client.unfocused         #E1D5E7   #F4F1DE     #888888     #E1D5E7     #F4F1DE
+client.urgent            #FFBABA   #FFC2C7     #FFFFFF     #FFBABA     #FFC2C7
+client.placeholder       #D0D0D0   #FFFFFF     #000000     #D0D0D0     #FFFFFF
+client.background        #D0D0D0
+
+# Set gaps between windows (inner gaps) and screen edges (outer gaps)
+gaps inner 10
+gaps outer 3

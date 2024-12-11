@@ -1,0 +1,46 @@
+* {
+    background:    #282a36;  /* Dark gray for everything */
+    foreground:    #f8f8f2;  /* Light gray text */
+    border-color:  #282a36;  /* Border matches background */
+    border-radius: 5px;
+    border:        1px;
+    padding:       3px;
+    width:         25%;      /* Smaller width */
+    lines:         5;        /* Show fewer lines */
+    font:          "monospace 10";  /* Smaller text */
+}
+
+window {
+    width:         25%;      /* Small window */
+    border-radius: 5px;
+}
+
+listview {
+    lines: 5;  /* Show 5 items at a time */
+}
+
+element {
+    padding: 2px 6px;
+    background: #282a36;  /* Set uniform dark gray background for all elements */
+    foreground: #f8f8f2;  /* Light gray text */
+}
+
+element.normal {
+    background: #282a36;  /* Force all elements to have the same background */
+    foreground: #f8f8f2;
+}
+
+element.alternate {
+    background: #282a36;  /* Prevent alternating background colors */
+    foreground: #f8f8f2;
+}
+
+element.selected {
+    background:    #44475a;  /* Slightly darker gray for selected item */
+    foreground:    #f8f8f2;  /* Same text color */
+}
+
+textbox {
+    text-color: #f8f8f2;
+    font: "monospace 10";  /* Smaller font for input box */
+}

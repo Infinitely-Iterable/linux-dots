@@ -1,0 +1,81 @@
+# Shadows
+shadow = true;
+shadow-radius = 8;
+shadow-opacity = 0.6;
+shadow-offset-x = -3;
+shadow-offset-y = -3;
+shadow-exclude = [
+  "class_g ?= 'i3-frame'"
+];
+
+# Fading
+fading = true;
+fade-in-step = 0.03;
+fade-out-step = 0.03;
+fade-delta = 4;
+
+# Transparency / Opacity
+inactive-opacity = 1;
+frame-opacity = 1.0;
+inactive-opacity-override = false;
+detect-client-opacity = true;
+
+# Opacity rules for specific applications
+opacity-rule = [
+  "65:class_g = 'Alacritty'",   # Alacritty at 65% transparency
+  "90:class_g = 'URxvt'",       # URxvt at 90%
+  "97:class_g = 'Anki'",        # Anki at 97%
+  "70:class_g = 'i3bar'"        # i3bar at 70%
+];
+
+# General settings
+backend = "glx";
+experimental-backends = true;
+vsync = true;
+mark-wmwin-focused = true;
+mark-ovredir-focused = true;
+detect-rounded-corners = true;
+use-ewmh-active-win = true;
+detect-transient = true;
+detect-client-leader = true;
+use-damage = true;
+resize-damage = 1
+log-level = "warn";
+
+# Window types (wintypes) settings
+wintypes: {
+  tooltip = { fade = true; shadow = true; opacity = 1; };
+  dock = { shadow = false; };
+  dnd = { shadow = false; };
+  popup_menu = { opacity = 1; };
+  dropdown_menu = { opacity = 1; };
+}
+
+corner-radius = 25;
+rounded-corners-exclude = [
+  "window_type = 'dock'",
+  "window_type = 'desktop'"
+];
+
+round-borders = 1;
+round-borders-exclude = [
+  "window_type = 'dock'",
+  "window_type = 'desktop'"
+];
+
+#################################
+#     Background-Blurring       #
+#################################
+
+blur: {
+  # requires: https://github.com/ibhagwan/picom
+  method = "kawase";
+  #method = "kernel";
+  strength = 7;
+  # deviation = 1.0;
+  # kernel = "11x11gaussian";
+  background = false;
+  background-frame = false;
+  background-fixed = false;
+  kern = "3x3box";
+}

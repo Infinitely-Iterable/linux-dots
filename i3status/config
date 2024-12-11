@@ -1,0 +1,59 @@
+general {
+  colors = true
+  color_good = "#a3be8c"
+  color_degraded = "#ebcb8b"
+  color_bad = "#bf616a"
+  interval = 30
+  separator = "|"
+}
+
+#order += "disk /"
+order += "volume indic"
+order += "memory"
+order += "load"
+order += "battery 0"
+order += "tztime local"
+#order += "wireless wlan0"
+order += "ethernet eth0"
+
+
+volume indic {
+	format = "𝅘𝅥𝅮:%volume"
+}
+
+wireless wlan0 {
+        format_up = "W: %quality%% at %essid (%bitrate) - %ip"
+        format_down = "W: down"
+}
+
+ethernet eth0 {
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+
+battery 0 {
+        format = "%status%percentage"
+        format_down = "No battery"
+        status_chr = "🔌"
+        status_bat = "🔋"
+        status_full = "🔋"
+        path = "/sys/class/power_supply/BAT0/uevent"
+        low_threshold = 10
+}
+
+tztime local {
+        format = "%m-%d %H:%M"
+}
+
+load {
+        format = "🖥️:%5min"
+}
+
+memory {
+        format = "🧠:%percentage_used"
+}
+
+disk "/" {
+        format = "Disk: %free/%total"
+}
+

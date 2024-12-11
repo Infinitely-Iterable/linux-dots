@@ -1,0 +1,42 @@
+# i3blocks configuration file converted from i3status
+
+# Global properties
+separator=true
+separator_block_width=15
+
+[volume]
+command=echo "𝅘𝅥𝅮:$(amixer get Master | grep -E -o '[0-9]{1,3}?%' | head -1)"
+interval=1
+signal=10
+
+[memory]
+command=free -m | awk '/Mem:/ { printf("🧠:%2.1f%\n", $3/$2 * 100.0) }'
+interval=30
+
+[load]
+command=echo "🖥️:$(cut -d ' ' -f1 /proc/loadavg)"
+interval=10
+
+[battery]
+command=~/.config/i3blocks/battery.sh
+interval=30
+
+[time]
+command=date '+%m-%d %H:%M'
+interval=60
+
+[ethernet]
+command=~/.config/i3blocks/ethernet.sh
+interval=10
+
+# Optional: Uncomment if you want to include disk usage
+# [disk]
+# command=df -h / | awk '/\// {print "Disk: " $4 "/" $2}'
+# interval=60
+
+# Add the keyboard toggle block
+[onboard]
+full_text=⌨
+command=~/.config/i3blocks/toggle_keyboard.sh
+interval=once
+signal=1
