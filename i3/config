@@ -84,6 +84,7 @@ bindsym $mod+shift+d exec discord
 bindsym $mod+Return exec alacritty
 bindsym $mod+shift+e exec /opt/cxoffice/bin/wine --bottle "Microsoft_Office_365-2" --cx-app excel.exe
 bindsym $mod+shift+v exec vim
+bindsym $mod+x exec $HOME/Documents/scripts/auto-rotate.sh
 
 # Scratchpad for Xournal++
 #exec --no-startup-id xournalpp --name scratch
