@@ -10,15 +10,15 @@ foreground = "#E2C1A6"
 size = 12.0
 
 [font.bold]
-family = "3270 Nerd Font"
+family = "AnonymicePro Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "3270 Nerd Font"
+family = "AnonymicePro Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "3270 Nerd Font"
+family = "AnonymicePro Nerd Font"
 style = "Regular"
 
 [[keyboard.bindings]]

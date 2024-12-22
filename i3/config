@@ -76,25 +76,26 @@ bindsym --release $mod+s exec --no-startup-id /home/grant-decapua/Documents/scri
 #open browsers
 bindsym $mod+i exec qutebrowser
 bindsym $mod+shift+i exec firefox
+bindsym $mod+shift+e exec firefox --new-window https://mail.proton.me/u/0/inbox
 bindsym $mod+n exec obsidian
 bindsym $mod+p exec splashtop-business
 bindsym $mod+w exec VirtualBoxVM --startvm win-10
 bindsym $mod+shift+p exec keeperpasswordmanager
 bindsym $mod+shift+d exec discord
 bindsym $mod+Return exec alacritty
-bindsym $mod+shift+e exec /opt/cxoffice/bin/wine --bottle "Microsoft_Office_365-2" --cx-app excel.exe
+# bindsym $mod+shift+e exec /opt/cxoffice/bin/wine --bottle "Microsoft_Office_365-2" --cx-app excel.exe
 bindsym $mod+shift+v exec vim
 bindsym $mod+x exec $HOME/Documents/scripts/auto-rotate.sh
 
 # Scratchpad for Xournal++
-#exec --no-startup-id xournalpp --name scratch
-#for_window [instance="xournalpp"] move scratchpad
-#bindsym $mod+Shift+s scratchpad show
+exec --no-startup-id xournalpp --name scratch
+for_window [instance="xournalpp"] move scratchpad
+bindsym $mod+m scratchpad show
 
 # Scratchpad for XDE SMS
-exec --no-startup-id kdeconnect-sms --name scratch2
-for_window [instance="kdeconnect-sms"] move scratchpad
-bindsym $mod+m scratchpad show
+#exec --no-startup-id kdeconnect-sms --name scratch2
+#for_window [instance="kdeconnect-sms"] move scratchpad
+#bindsym $mod+m scratchpad show
 
 #for_window [class="excel.exe"] floating enable
 #for_window [class="excel.exe" title="Microsoft Excel"] floating enable

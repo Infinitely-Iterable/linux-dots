@@ -4,4 +4,47 @@
 //@theme "/usr/share/rofi/themes/paper-float.rasi"
 //@theme "/usr/share/rofi/themes/sidebar.rasi"
 //@theme "/usr/share/rofi/themes/Arc.rasi"
-@theme "/usr/share/rofi/themes/android_notification.rasi"
+//@theme "/usr/share/rofi/themes/android_notification.rasi"
+//@theme "/usr/share/rofi/themes/dmenu.rasi"
+//@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
+
+configuration {
+    // General configuration for Rofi
+    font: "3270 Nerd Font 12";
+    modi: "drun,run";                // Enable both drun and run modes
+}
+
+* {
+    background: rgba(43, 53, 62, 0.8); // Transparent or fallback to #2B353E
+    foreground: #E2C1A6;               // Font color
+    font: "3270 Nerd Font 12";         // Font and size
+    border: 0px;                       // No border
+}
+
+window {
+    location: north;                   // Place at the top of the screen
+    anchor: center;                    // Center horizontally
+}
+
+mainbox {
+    children: [ "prompt", "entry", "listview" ]; // Include entry for typing
+    spacing: 5px;                               // Space between elements
+}
+
+textbox {
+    horizontal-align: 0.5;             // Center align text
+}
+
+entry {
+    placeholder: "Type to search...";  // Placeholder text
+    spacing: 2px;                      // Adjust spacing
+}
+
+listview {
+    layout: "list";                    // Default list layout
+    dynamic: true;                     // Dynamically resize list
+    spacing: 2px;                      // Adjust spacing between entries
+}
+
+//@theme "/usr/share/rofi/themes/dmenu.rasi"
+@theme "/home/grant-decapua/.local/share/rofi/themes/custom_dmenu.rasi"
