@@ -25,6 +25,9 @@ exec feh --bg-fill Pictures/bgs/bg19.jpg
 exec tlp start
 exec --no-startup-id brightnessctl set 25%
 
+#init keyboard remap
+exec --no-startup-id xmodmap ~/.config/Xmodmap
+
 #init picom compositor
 exec_always --no-startup-id picom --experimental-backends --config ~/.config/picom/picom.conf
 
@@ -42,18 +45,12 @@ for_window [class="VirtualBox"] focus_follows_mouse no for_window [class="Virtua
 
 #focus wont follow mouse
 focus_follows_mouse no
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy --nofork
 exec --no-startup-id nm-applet
 #exec --no-startup-id flameshot
 exec --no-startup-id blueman-applet
 
-bindsym --release $mod+c exec --no-startup-id /home/grant-decapua/Documents/scripts/auto-layout.sh
 
 ################Brightness and Volume Control########################
 
@@ -67,13 +64,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 bindsym $mod+Shift+q kill
 
-#bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+d exec --no-startup-id rofi -show drun
-bindsym --release $mod+s exec --no-startup-id /home/grant-decapua/Documents/scripts/script-dmenu.sh
-
 ############## App Shortcuts #################
-
-#open browsers
 bindsym $mod+i exec qutebrowser
 bindsym $mod+shift+i exec firefox
 bindsym $mod+shift+e exec firefox --new-window https://mail.proton.me/u/0/inbox
@@ -82,10 +73,9 @@ bindsym $mod+p exec splashtop-business
 bindsym $mod+w exec VirtualBoxVM --startvm win-10
 bindsym $mod+shift+p exec keeperpasswordmanager
 bindsym $mod+shift+d exec discord
-bindsym $mod+Return exec alacritty
-# bindsym $mod+shift+e exec /opt/cxoffice/bin/wine --bottle "Microsoft_Office_365-2" --cx-app excel.exe
+bindsym $mod+Return exec alacritty -e tmux new-session
+bindsym $mod+Shift+Return exec alacritty -e tmux new-session -A -s main
 bindsym $mod+shift+v exec vim
-bindsym $mod+x exec $HOME/Documents/scripts/auto-rotate.sh
 
 # Scratchpad for Xournal++
 exec --no-startup-id xournalpp --name scratch
@@ -97,6 +87,17 @@ bindsym $mod+m scratchpad show
 #for_window [instance="kdeconnect-sms"] move scratchpad
 #bindsym $mod+m scratchpad show
 
+############# Macros #############
+bindsym $mod+slash exec --no-startup-id xdotool type '~/'
+bindsym $mod+shift+f exec flameshot gui
+bindsym --release $mod+c exec --no-startup-id /home/grant-decapua/Documents/scripts/auto-layout.sh
+bindsym $mod+x exec $HOME/Documents/scripts/auto-rotate.sh
+
+############## App Launchers #################
+#bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym --release $mod+s exec --no-startup-id /home/grant-decapua/Documents/scripts/script-dmenu.sh
+
 #for_window [class="excel.exe"] floating enable
 #for_window [class="excel.exe" title="Microsoft Excel"] floating enable
 
@@ -104,9 +105,8 @@ bindsym $mod+m scratchpad show
 #for_window [class="excel.exe" title="Microsoft Excel"] floating enable
 #for_window [class="excel.exe" title=".*Excel.*"] floating enable
 
-#select screenshot area
-bindsym $mod+shift+f exec flameshot gui
 
+############# Navigation #############
 # change focus (disabled in lieu of using mod + arrows)
  bindsym $mod+h focus left
  bindsym $mod+j focus down

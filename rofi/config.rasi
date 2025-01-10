@@ -47,4 +47,4 @@ listview {
 }
 
 //@theme "/usr/share/rofi/themes/dmenu.rasi"
-@theme "/home/grant-decapua/.local/share/rofi/themes/custom_dmenu.rasi"
+@theme "/home/grant-decapua/.config/rofi/themes/custom_dmenu.rasi"
